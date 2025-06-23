@@ -4,7 +4,8 @@ function FormularioAdminSolicitud({ solicitud, onAceptar, onVolver, setMensaje }
   const rechazarSolicitud = async () => {
     const confirmar = window.confirm("¿Estás seguro de que deseas rechazar esta solicitud?");
     if (confirmar) {
-      await axios.put(`http://127.0.0.1:5000/solicitudes/${solicitud.id}/rechazar`);
+      // Utilizando la variable de entorno para la URL
+      await axios.put(`${import.meta.env.VITE_API_URL}/solicitudes/${solicitud.id}/rechazar`);
       setMensaje("Solicitud rechazada correctamente.");
       onVolver(); // Regresa a la tabla
     }

@@ -8,12 +8,12 @@ function SolicitudesEnCurso() {
   const [mensaje, setMensaje] = useState("");
 
   const cargarSolicitudes = async () => {
-    const res = await axios.get("http://127.0.0.1:5000/solicitudes/En_curso");
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/solicitudes/En_curso`);
     setSolicitudes(res.data);
   };
 
   const actualizarEstado = async (id, nuevoEstado) => {
-    await axios.put(`http://127.0.0.1:5000/solicitudes/${id}/estado`, {
+    await axios.put(`${import.meta.env.VITE_API_URL}/solicitudes/${id}/estado`, {
       estado: nuevoEstado,
     });
     setMensaje(`Solicitud #${id} actualizada a ${nuevoEstado}`);
@@ -24,13 +24,13 @@ function SolicitudesEnCurso() {
     const confirmar = window.confirm("¿Estás seguro de cerrar esta solicitud?");
     if (!confirmar) return;
 
-    await axios.put(`http://127.0.0.1:5000/solicitudes/${id}/cerrar`);
+    await axios.put(`${import.meta.env.VITE_API_URL}/solicitudes/${id}/cerrar`);
     setMensaje(`Solicitud #${id} ha sido cerrada`);
     cargarSolicitudes();
   };
 
   const verDetalle = async (id) => {
-    const res = await axios.get(`http://127.0.0.1:5000/solicitudes/${id}`);
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/solicitudes/${id}`);
     setDetalle(res.data);
   };
 
@@ -71,8 +71,7 @@ function SolicitudesEnCurso() {
                       className={`text-xs px-2 py-1 rounded mr-1
                         ${s.estado === estado
                           ? "bg-blue-700 text-white"
-                          : "bg-gray-200 hover:bg-gray-300"}
-                      `}
+                          : "bg-gray-200 hover:bg-gray-300"}`}
                       onClick={() => actualizarEstado(s.id, estado)}
                     >
                       {estado}

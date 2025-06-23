@@ -7,17 +7,17 @@ function SolicitudesCerradas() {
   const [detalle, setDetalle] = useState(null);
 
   const cargarSolicitudes = async () => {
-    const res = await axios.get("http://127.0.0.1:5000/solicitudes/cerradas");
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/solicitudes/cerradas`);
     setSolicitudes(res.data);
   };
 
   const verDetalle = async (id) => {
-    const res = await axios.get(`http://127.0.0.1:5000/solicitudes/${id}`);
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/solicitudes/${id}`);
     setDetalle(res.data);
   };
 
   const descargarExcel = async () => {
-    const res = await axios.get("http://127.0.0.1:5000/solicitudes/cerradas/exportar", {
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/solicitudes/cerradas/exportar`, {
       responseType: "blob",
     });
 

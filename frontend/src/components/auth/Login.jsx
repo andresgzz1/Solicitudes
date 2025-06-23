@@ -13,7 +13,7 @@ function Login({ onLogin }) {
     setIsLoading(true);
 
     try {
-      const response = await axios.post("http://127.0.0.1:5000/login", {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/login`, {
         correo,
         password,
       });

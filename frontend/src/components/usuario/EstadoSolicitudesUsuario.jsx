@@ -7,13 +7,13 @@ function EstadoSolicitudesUsuario({ usuario }) {
   const [detalle, setDetalle] = useState(null);
 
   const verDetalle = async (id) => {
-    const res = await axios.get(`http://127.0.0.1:5000/solicitudes/${id}`);
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/solicitudes/${id}`);
     setDetalle(res.data);
   };
 
   useEffect(() => {
     const cargarSolicitudes = async () => {
-      const res = await axios.get(`http://127.0.0.1:5000/solicitudes/usuario/${usuario.id}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/solicitudes/usuario/${usuario.id}`);
       const activas = res.data.filter((s) => s.estado !== "CERRADA"); 
       setSolicitudes(activas);
     };

@@ -117,11 +117,11 @@ function SolicitudNuevaUsuario({ usuario }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://127.0.0.1:5000/solicitudes", {
+      await axios.post(`${import.meta.env.VITE_API_URL}/solicitudes`, {
         ...formulario,
         usuario_id: usuario.id,
       });
-      setMensaje("Solicitud enviada con éxitossss.");
+      setMensaje("Solicitud enviada con éxito.");
       setFormulario({
         insumo: "",
         equipo_estandar: "",

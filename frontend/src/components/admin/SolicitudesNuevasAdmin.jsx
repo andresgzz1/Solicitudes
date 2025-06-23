@@ -8,17 +8,17 @@ function SolicitudesNuevasAdmin() {
   const [mensaje, setMensaje] = useState("");
 
   const cargarSolicitudes = async () => {
-    const res = await axios.get("http://127.0.0.1:5000/solicitudes/nuevas");
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/solicitudes/nuevas`);
     setSolicitudes(res.data);
   };
 
   const verDetalle = async (id) => {
-    const res = await axios.get(`http://127.0.0.1:5000/solicitudes/${id}`);
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/solicitudes/${id}`);
     setDetalle(res.data);
   };
 
   const aceptarSolicitud = async () => {
-    await axios.put(`http://127.0.0.1:5000/solicitudes/${detalle.id}/aceptar`);
+    await axios.put(`${import.meta.env.VITE_API_URL}/solicitudes/${detalle.id}/aceptar`);
     setMensaje("Solicitud aceptada correctamente.");
     setDetalle(null);
     cargarSolicitudes();
@@ -65,14 +65,14 @@ function SolicitudesNuevasAdmin() {
         </table>
       ) : (
         <FormularioAdminSolicitud
-        solicitud={detalle}
-        onAceptar={aceptarSolicitud}
-        onVolver={() => {
-          setDetalle(null);
-          cargarSolicitudes(); 
-        }}
-        setMensaje={setMensaje}
-      />
+          solicitud={detalle}
+          onAceptar={aceptarSolicitud}
+          onVolver={() => {
+            setDetalle(null);
+            cargarSolicitudes(); 
+          }}
+          setMensaje={setMensaje}
+        />
       )}
     </div>
   );

@@ -6,7 +6,7 @@ function HistorialSolicitudes() {
 
   const cargarHistorial = async () => {
     const usuario = JSON.parse(localStorage.getItem("usuario"));
-    const res = await axios.get(`http://127.0.0.1:5000/usuario/${usuario.id}/historial`);
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/usuario/${usuario.id}/historial`);
     setSolicitudes(res.data);
   };
 
