@@ -11,6 +11,13 @@ import os
 
 solicitudes_bp = Blueprint('solicitudes', __name__)
 
+
+
+@solicitudes_bp.route('/', methods=['GET'])
+def bienvenida_usuario():
+    return jsonify({"message": "Bienvenido, usuario!"}), 200
+
+
 @solicitudes_bp.route('/solicitudes', methods=['POST'])
 def crear_solicitud():
     data = request.json
